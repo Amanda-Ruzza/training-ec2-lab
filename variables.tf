@@ -24,6 +24,10 @@ variable "public_subnet_name" {
   type = string
 }
 
+variable "private_subnet_name" {
+  type = string
+}
+
 variable "my_keypair" {
   default = "aws_keypair"
 }
