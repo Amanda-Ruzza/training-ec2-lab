@@ -37,10 +37,8 @@ resource "aws_security_group" "my_public_app_sg" {
 #resources for the EC2 instances on the private subnets
 resource "aws_security_group" "my_private_app_sg" {
   name        = "my_private_app_sg"
-  description = "Allow access to this server"
-  vpc_id      = data.aws_vpc.main_vpc.id
-
-
+  description = "Allow access to this server only from the public instance private IP "
+  vpc_id      = data.aws_vpc.main_vpc.id #attach the private security group from the instances
 
 
   # INBONUD CONNECTIONS
@@ -50,7 +48,7 @@ resource "aws_security_group" "my_private_app_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["68.160.218.208/32"] # using my ip as an experiment
+    cidr_blocks = ["192.168.1.0/24"] # make a reference to the Public SG
   }
 
   # ingress {
@@ -70,5 +68,7 @@ resource "aws_security_group" "my_private_app_sg" {
     protocol    = "-1" # TCP + UDP
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+
 
 }
