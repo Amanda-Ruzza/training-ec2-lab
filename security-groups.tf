@@ -3,13 +3,10 @@ resource "aws_security_group" "my_public_app_sg" {
   description = "Allow access to this server"
   vpc_id      = data.aws_vpc.main_vpc.id
 
-
-
-
-  # INBONUD CONNECTIONS
+  # INBOUND CONNECTIONS
 
   ingress {
-    description = "Allow SSH into the EC2"
+    description = "Allows SSH into the EC2"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -23,11 +20,9 @@ resource "aws_security_group" "my_public_app_sg" {
   # protocol = "tcp"
   # cidr_blocks = ["0.0.0.0/0"] #only for my own IP address
 
-
   #OUTBOUND CONNECTIONS
-
   egress {
-    description = "Allow access to the world"
+    description = "Allows access to the world"
     from_port   = 0
     to_port     = 0
     protocol    = "-1" # TCP + UDP
@@ -37,18 +32,18 @@ resource "aws_security_group" "my_public_app_sg" {
 #resources for the EC2 instances on the private subnets
 resource "aws_security_group" "my_private_app_sg" {
   name        = "my_private_app_sg"
-  description = "Allow access to this server only from the public instance private IP "
+  description = "Allows access to this server only from the public instance private IP "
   vpc_id      = data.aws_vpc.main_vpc.id #attach the private security group from the instances
 
 
   # INBONUD CONNECTIONS
 
   ingress {
-    description = "Allow SSH into the EC2"
+    description = "Allows SSH into the EC2"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["192.168.1.0/24"] # make a reference to the Public SG
+    cidr_blocks = ["192.168.1.0/24"] # ALL INSTANCES IN PUBLIC SUBNET ARE ALLOWED TO CONNECT
   }
 
   # ingress {
