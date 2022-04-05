@@ -32,6 +32,6 @@ variable "my_keypair" {
   default = "aws_keypair"
 }
 
-variable "number_of_instances" {
-  description = "Ammount of instances for my public subnet"
+variable "number_of_private_instances" {
+    description = "Amount of instances for my Private subnet"
 }

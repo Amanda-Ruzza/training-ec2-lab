@@ -7,7 +7,7 @@ resource "aws_instance" "my_public_server" {
   key_name               = var.my_keypair
 
   tags = {
-    Name = "public_server_${count.index + 1}"
+    Name = "public_server"
   }
 }
 
