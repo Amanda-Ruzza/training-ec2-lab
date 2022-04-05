@@ -1,0 +1,25 @@
+# This is another way to do it, not necessary for the EC2 challenge project
+#This helps you connect to AWS directly from GitHub
+#name: Terraform Deploy Demo
+#on:
+
+      steps:
+      - name: git clone of my repo
+        uses: actions/checkout@v3
+      
+      - name: AWS authentication
+        uses: aws-actions/configure-
+
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Init Project
+        run: terraform init
+      
+      - name: Run TF plan
+        run: terraform plan
+      
+      - name: Apply infra
+        run: terraform apply -auto-approve
+
