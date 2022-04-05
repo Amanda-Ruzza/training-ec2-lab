@@ -13,12 +13,14 @@ resource "aws_security_group" "my_public_app_sg" {
     cidr_blocks = ["68.160.218.208/32"] # 0.0.0.0/0
   }
 
-  # ingress {
-  # description = "Allow HTTP into the EC2"
-  # from_port = 80
-  # to_port = 80
-  # protocol = "tcp"
-  # cidr_blocks = ["0.0.0.0/0"] #only for my own IP address
+  ingress {
+    description = "Allows HTTP into the EC2"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["68.160.218.208/32"] # 0.0.0.0/0 #only for my own IP address
+  }
+
 
   #OUTBOUND CONNECTIONS
   egress {
@@ -36,7 +38,7 @@ resource "aws_security_group" "my_private_app_sg" {
   vpc_id      = data.aws_vpc.main_vpc.id #attach the private security group from the instances
 
 
-  # INBONUD CONNECTIONS
+  # INBOUND CONNECTIONS
 
   ingress {
     description = "Allows SSH into the EC2"
